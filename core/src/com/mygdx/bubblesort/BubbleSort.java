@@ -72,7 +72,7 @@ public class BubbleSort extends ApplicationAdapter {
 
 	ArrayList<Rectangle> fillList() {
 
-		int intensity = 15;
+		int intensity = 10;
 		ArrayList<Rectangle> list = new ArrayList<>();
 		Random random = new Random();
 
