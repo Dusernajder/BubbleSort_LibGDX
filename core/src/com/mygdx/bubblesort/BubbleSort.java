@@ -3,8 +3,10 @@ package com.mygdx.bubblesort;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Timer;
 
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ import java.util.Random;
 public class BubbleSort extends ApplicationAdapter {
 
 
-    private ArrayList<Vector4> list;
+    private ArrayList<Rectangle> list;
     private ShapeRenderer renderer;
     private MyTask task;
     Timer timer;
@@ -24,7 +26,7 @@ public class BubbleSort extends ApplicationAdapter {
 
         Gdx.graphics.setWindowedMode(1080, 720);
         renderer = new ShapeRenderer();
-        list = fillList(100);
+        list = fillList(10);
         task = new MyTask(list);
         timer = new Timer();
     }
@@ -32,18 +34,24 @@ public class BubbleSort extends ApplicationAdapter {
     @Override
     public void render() {
 
+		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 		timer.postTask(task);
     	list = task.getList();
 
-		renderer.begin(ShapeType.Line);
+		renderer.begin(ShapeType.Filled);
 		renderer.setColor(Color.BLACK);
 
-		for (Vector4 vector : list) {
-			System.out.println(vector.getHeight());
-			renderer.line(vector.getX1(), vector.getY1(), vector.getX2(), vector.getY2());
+		for (Rectangle rectangle : list) {
+			System.out.println(rectangle.getHeight());
+			renderer.rect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
 		}
 
 		renderer.end();
+
+
+		System.out.println("\n");
 
 		try {
 			Thread.sleep(1000);
@@ -62,23 +70,21 @@ public class BubbleSort extends ApplicationAdapter {
     }
 
 
-	ArrayList<Vector4> fillList(int intensity) {
+	ArrayList<Rectangle> fillList(int intensity) {
 
-		// The higher intensity gets, less values are displayed
-		ArrayList<Vector4> list = new ArrayList<>();
+
+		ArrayList<Rectangle> list = new ArrayList<>();
 		Random random = new Random();
-
 
 		for (int i = 0; i < Gdx.graphics.getWidth() / intensity; i++) {
 
-			Vector4 vector4 = new Vector4();
+			Rectangle rect = new Rectangle();
+			rect.setX(i * intensity);
+			rect.setY(0);
+			rect.setWidth(intensity);
+			rect.setHeight(random.nextInt(Gdx.graphics.getHeight()));
 
-			vector4.setX1(intensity * i);
-			vector4.setY1(0);
-			vector4.setX2(vector4.getX1());
-			vector4.setY2(random.nextInt(Gdx.graphics.getHeight()));
-
-			list.add(vector4);
+			list.add(rect);
 		}
 		return list;
 	}
@@ -93,8 +99,7 @@ public class BubbleSort extends ApplicationAdapter {
 //
 //                if (list.get(j).getHeight() > list.get(j + 1).getHeight()) {
 //
-//					Gdx.gl.glClearColor(1, 1, 1, 1);
-//					Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+//
 //
 //                    Vector4 temp = list.get(j);
 //                    list.set(j, list.get(j + 1));

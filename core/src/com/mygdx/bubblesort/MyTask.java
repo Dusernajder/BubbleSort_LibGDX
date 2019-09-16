@@ -1,16 +1,18 @@
 package com.mygdx.bubblesort;
 
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Timer;
 
 import java.util.ArrayList;
 
 public class MyTask extends Timer.Task {
 
-    private ArrayList<Vector4> list;
+    private ArrayList<Rectangle> list;
     private int i = 0;
+    private int j = 0;
 
-    public MyTask (ArrayList<Vector4> list){
+    public MyTask (ArrayList<Rectangle> list){
         this.list = list;
     }
 
@@ -20,18 +22,20 @@ public class MyTask extends Timer.Task {
         sort(list);
     }
 
-    void sort (ArrayList<Vector4> list) {
+    void sort (ArrayList<Rectangle> list) {
 
-        if (i <= list.size()) {
-            for (int j = 0; j < list.size() - 1 - i; j++) {
+        if (i < list.size() - 1) {
+            if (j < list.size() - 1 - i) {
 
                 if (list.get(j).getHeight() > list.get(j + 1).getHeight()) {
 
-                    Vector4 temp = list.get(j);
+                    Rectangle temp = list.get(j);
                     list.set(j, list.get(j + 1));
                     list.set(j + 1, temp);
 
                 }
+
+                j++;
             }
         }
         else {
@@ -40,11 +44,9 @@ public class MyTask extends Timer.Task {
         }
 
         i++;
-
-        return;
     }
 
-    public ArrayList<Vector4> getList() {
+    public ArrayList<Rectangle> getList() {
 
         return list;
     }
