@@ -1,6 +1,7 @@
 package com.mygdx.bubblesort;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Timer;
 
@@ -29,18 +30,28 @@ public class MyTask extends Timer.Task {
 
                 if (list.get(j).getHeight() > list.get(j + 1).getHeight()) {
 
-                    float tempX = list.get(j).getX();
-                    list.get(j).setX(list.get(j + 1).getX());
-                    list.get(j + 1).setX(tempX);
+                    Rectangle rect1 = list.get(j);
+                    Rectangle rect2 = list.get(j + 1);
 
+
+                    float tempX = rect1.getX();
+                    rect1.setX(rect2.getX());
+                    rect2.setX(tempX);
+
+
+                    Rectangle temp = list.get(j);
+                    list.set(j, list.get(j + 1));
+                    list.set(j + 1, temp);
 
                 }
             }
         }
         else {
             System.out.println("Finished");
+            Gdx.gl.glClearColor(0, 1, 0, 2);
             System.exit(0);
         }
+
         i++;
     }
 
