@@ -48,8 +48,6 @@ public class MyTask extends Timer.Task {
         }
         else {
             System.out.println("Finished");
-            Gdx.gl.glClearColor(0, 1, 0, 2);
-            System.exit(0);
         }
 
         i++;
@@ -58,10 +56,5 @@ public class MyTask extends Timer.Task {
     public ArrayList<Rectangle> getList() {
 
         return list;
-    }
-
-    void print(){
-
-        System.out.println(i);
     }
 }
