@@ -28,7 +28,8 @@ public class BubbleSort extends ApplicationAdapter {
         renderer = new ShapeRenderer();
         list = fillList(10);
         task = new MyTask(list);
-        timer = new Timer();
+        timer = Timer.instance();
+        timer.scheduleTask(task, 0.2f, 0.2f);
     }
 
     @Override
@@ -37,7 +38,6 @@ public class BubbleSort extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		timer.postTask(task);
     	list = task.getList();
 
 		renderer.begin(ShapeType.Filled);
@@ -53,12 +53,6 @@ public class BubbleSort extends ApplicationAdapter {
 
 		System.out.println("\n");
 
-		try {
-			Thread.sleep(1000);
-		}
-		catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 
 	}
 

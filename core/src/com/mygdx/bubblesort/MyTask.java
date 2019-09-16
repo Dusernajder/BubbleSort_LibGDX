@@ -10,7 +10,6 @@ public class MyTask extends Timer.Task {
 
     private ArrayList<Rectangle> list;
     private int i = 0;
-    private int j = 0;
 
     public MyTask (ArrayList<Rectangle> list){
         this.list = list;
@@ -24,30 +23,34 @@ public class MyTask extends Timer.Task {
 
     void sort (ArrayList<Rectangle> list) {
 
-        if (i < list.size() - 1) {
-            if (j < list.size() - 1 - i) {
+        if (i < list.size()) {
+            for (int j = 0; j < list.size() - 1 - i; j++) {
+
 
                 if (list.get(j).getHeight() > list.get(j + 1).getHeight()) {
 
-                    Rectangle temp = list.get(j);
-                    list.set(j, list.get(j + 1));
-                    list.set(j + 1, temp);
+                    float tempX = list.get(j).getX();
+                    list.get(j).setX(list.get(j + 1).getX());
+                    list.get(j + 1).setX(tempX);
+
 
                 }
-
-                j++;
             }
         }
         else {
             System.out.println("Finished");
             System.exit(0);
         }
-
         i++;
     }
 
     public ArrayList<Rectangle> getList() {
 
         return list;
+    }
+
+    void print(){
+
+        System.out.println(i);
     }
 }
