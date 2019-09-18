@@ -20,16 +20,18 @@ public class BubbleSort extends ApplicationAdapter {
     private MyTask task;
     Timer timer;
 
+    private float speed = 0.01f;
+
 
     @Override
     public void create() {
 
-        Gdx.graphics.setWindowedMode(1080, 720);
+        Gdx.graphics.setWindowedMode(1400, 720);
         renderer = new ShapeRenderer();
         list = fillList(1);
         task = new MyTask(list);
         timer = Timer.instance();
-        timer.scheduleTask(task, 0.01f, 0.01f);
+        timer.scheduleTask(task, speed, speed);
     }
 
     @Override

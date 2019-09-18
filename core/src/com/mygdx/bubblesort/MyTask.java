@@ -1,7 +1,6 @@
 package com.mygdx.bubblesort;
 
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Timer;
 
@@ -48,6 +47,13 @@ public class MyTask extends Timer.Task {
         }
         else {
             System.out.println("Finished");
+            try {
+                Thread.sleep(3000);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.exit(0);
         }
 
         i++;
